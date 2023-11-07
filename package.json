@@ -1,6 +1,12 @@
 {
   "dependencies": {
-    "grammy": "^1.19.2",
+    "@grammyjs/chat-members": "^1.0.10",
+    "dotenv": "^16.3.1",
+    "grammy": "^1.19.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "nodemon": "^3.0.1",
     "typescript": "^5.2.2"
   }
 }
