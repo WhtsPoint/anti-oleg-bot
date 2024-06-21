@@ -1,5 +1,8 @@
 interface Config {
-    BOT_PRIVATE_KEY: string
+	bot: {
+		olegId: string,
+    privateKey: string
+	}
 }
 
 function getEnvOrException(key: string): string {
@@ -12,7 +15,7 @@ function getEnvOrException(key: string): string {
     return value;
 }
 
-export const config = () => ({
+export const config = (): Config => ({
     bot: {
         privateKey: getEnvOrException('BOT_PRIVATE_KEY'),
         olegId: '563399648'

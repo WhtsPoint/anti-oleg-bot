@@ -5,6 +5,7 @@ import { config } from './utils/config'
 import commands from './commands'
 import { chatMembers } from '@grammyjs/chat-members'
 import { MyContext } from './types/MyContext'
+import attachHelp from './help'
 
 bootstrap()
 
@@ -15,6 +16,9 @@ bot.use(chatMembers(adapter))
 bot.use(commands)
 
 bot.start({
-    allowed_updates: ['chat_member', 'message'],
-    onStart: () => console.log('bot started!')
+	allowed_updates: ['chat_member', 'message'],
+	onStart: async () => {
+		console.log('Bot stared')
+		await attachHelp<MyContext>(bot)	
+	}
 });
