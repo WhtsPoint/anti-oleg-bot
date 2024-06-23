@@ -1,4 +1,5 @@
-import { createClient } from 'redis';
+import { createClient } from 'redis'
+import { config } from './config'
 
 type Connection = ReturnType<typeof createClient>
 
@@ -7,7 +8,7 @@ export class Redis {
 
 	public static getConnection(): Connection {
 		if (this.connection === null)	{
-			this.connection = createClient()
+			this.connection = createClient({ url: config().redis.url})
 			this.connection.connect()
 		}
 

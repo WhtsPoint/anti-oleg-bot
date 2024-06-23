@@ -1,8 +1,16 @@
-import { isBanned } from "../reps/bannedUsers"
-import { MyContext } from "../types/MyContext"
+import { Context } from 'grammy'
+import { isBanned } from '../reps/bannedUsers'
 
-export default async function banFilter(ctx: MyContext): Promise<boolean> {
-	const senderId = ctx.from?.id
+export default function banFilter<C extends Context>(
+	next: (ctx: C) => Promise<boolean|void>
+) {
+	return async (ctx: C) => {
+		const senderId = ctx.from?.id
 
-	return typeof senderId !== 'undefined' && typeof ctx.chatId !== 'undefined' && await isBanned(senderId, ctx.chatId) 
+	  if (typeof senderId !== 'undefined' && typeof ctx.chatId !== 'undefined' && await isBanned(senderId, ctx.chatId)) {
+			return await next?.(ctx) || true
+		}
+
+		return false
+	}
 }

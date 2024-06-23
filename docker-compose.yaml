@@ -4,3 +4,13 @@ services:
     restart: always
     environment:
       BOT_PRIVATE_KEY:
+      REDIS_URL: redis://redis:6379
+    networks:
+      - bot
+  redis:
+    image: redis:latest
+    networks:
+      - bot
+networks:
+  bot:
+    driver: bridge

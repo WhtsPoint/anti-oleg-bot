@@ -1,4 +1,4 @@
-import { Context } from "grammy"
+import { Context } from 'grammy'
 
 type Callback<C> = (ctx: C) => Promise<any>
 

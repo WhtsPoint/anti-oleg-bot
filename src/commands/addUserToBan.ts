@@ -1,28 +1,18 @@
-import { ban } from "../reps/bannedUsers"
-import { MyContext } from "../types/MyContext"
-import { stringTimeToSeconds } from "../utils/timeParser"
+import { ban } from '../reps/bannedUsers'
+import { MyContext } from '../types/MyContext'
 
 export default async function addUserToBan(ctx: MyContext) {
 	const targetId = ctx.message?.reply_to_message?.from?.id
-  const period = ctx.match
+  const period = ctx.time
 
-	if (typeof targetId === 'undefined') {
-		return ctx.reply('Нету цели')
+	if (
+		typeof targetId === 'undefined'
+		|| typeof period === 'undefined'
+		|| typeof ctx.chatId === 'undefined'
+	) {
+		throw new Error('Context is invalid')
 	}
 
-	if (typeof period !== 'string' || period === '') {
-		return ctx.reply('Ебалай, период где?')
-	}
-
-	let seconds
-
-	try {
-		seconds = stringTimeToSeconds(period)
-	} catch (error) {
-		return ctx.reply('Если ты не введёшь правильный период, я себе очко разорву!')
-	}
-
-	const chat = await ctx.getChat()
-
-	ban(targetId, chat.id, seconds)
+	await ban(targetId, ctx.chatId, period)
+	await ctx.reply('Олегизирован')
 }

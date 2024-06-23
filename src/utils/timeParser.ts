@@ -6,9 +6,9 @@ periodToSeconds['d'] = 1440 * periodToSeconds['m']
 periodToSeconds['w'] = 7 * periodToSeconds['d'] 
 
 export function stringTimeToSeconds(value: string): number {
-	if (value === 'forever') return Infinity
+	if (/forever/g.exec(value) !== null) return Infinity
 
-	const matches = /^([0-9]+)(d|w|m|s)$/g.exec(value)
+	const matches = /([0-9]+)(d|w|m|s)/g.exec(value)
 	
 	if (matches === null) throw new Error('Invalid time format')
 
