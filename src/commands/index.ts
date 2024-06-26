@@ -10,6 +10,7 @@ import timeFilter from '../filters/timeFilter'
 import mercyBannedUser from './mercyBannedUser'
 import adminFilter from '../filters/adminFilter'
 import { Command } from '../types/Command'
+import avoidSpam from './avoidSpam'
 
 const composer = new Composer<MyContext>()
 
@@ -21,6 +22,6 @@ const commands = {
 
 Object.entries(commands).forEach(([command, callback]) => composer.command(command, callback))
 
-composer.on('message', banFilter(prohibitTikTok(reactWithVomit)))
+composer.on('message', banFilter(avoidSpam(prohibitTikTok(reactWithVomit))))
 
 export default composer

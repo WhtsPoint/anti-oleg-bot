@@ -10,8 +10,8 @@ import timeMiddleware from './middlewares/timeMiddleware'
 
 bootstrap()
 
-const adapter = new MemorySessionStorage<ChatMember>();
-const bot = new Bot<MyContext>(config().bot.privateKey);
+const adapter = new MemorySessionStorage<ChatMember>()
+const bot = new Bot<MyContext>(config().bot.privateKey)
 
 bot.use(chatMembers(adapter))
 bot.use(timeMiddleware())
@@ -23,4 +23,4 @@ bot.start({
 		console.log('Bot stared')
 		await attachHelp<MyContext>(bot)	
 	}
-});
+})

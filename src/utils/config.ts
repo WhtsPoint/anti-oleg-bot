@@ -12,7 +12,7 @@ function getEnvOrException(key: string): string {
 	const value = process.env[key]
 
 	if (value === undefined) {
-			throw new Error('Missing env by key: ' + key)
+		throw new Error('Missing env by key: ' + key)
 	}
 
 	return value;

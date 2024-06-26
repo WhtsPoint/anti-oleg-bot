@@ -6,8 +6,7 @@ export default function banFilter<C extends Context>(
 ) {
 	return async (ctx: C) => {
 		const senderId = ctx.from?.id
-
-	  if (typeof senderId !== 'undefined' && typeof ctx.chatId !== 'undefined' && await isBanned(senderId, ctx.chatId)) {
+		if (typeof senderId !== 'undefined' && typeof ctx.chatId !== 'undefined' && await isBanned(senderId, ctx.chatId)) {
 			return await next?.(ctx) || true
 		}
 

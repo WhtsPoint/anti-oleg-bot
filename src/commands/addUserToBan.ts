@@ -3,7 +3,7 @@ import { MyContext } from '../types/MyContext'
 
 export default async function addUserToBan(ctx: MyContext) {
 	const targetId = ctx.message?.reply_to_message?.from?.id
-  const period = ctx.time
+  	const period = ctx.time
 
 	if (
 		typeof targetId === 'undefined'
