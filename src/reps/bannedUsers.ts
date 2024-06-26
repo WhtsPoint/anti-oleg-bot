@@ -3,7 +3,7 @@ import { Redis } from '../utils/redis'
 export async function isBanned(userId: number, chatId: number): Promise<boolean> {
 	const connection = await Redis.getConnection()
 
-	return Boolean(connection.exists(`ban:${chatId}:${userId}`))
+	return Boolean(await connection.exists(`ban:${chatId}:${userId}`))
 }
 
 export async function ban(userId: number, chatId: number, on: number): Promise<void> {
