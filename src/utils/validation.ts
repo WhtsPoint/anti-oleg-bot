@@ -1,9 +1,3 @@
-import { config } from './config'
-
-function isOleg(id: string): boolean {
-    return config().bot.olegId === id
-}
-
 function isTikTok(value: string): boolean {
     const tikTokRegex = new RegExp('tik|tok|vm|^[a-zA-Z0-9]{9}$|^[0-9]{19}$')
 
@@ -17,4 +11,4 @@ function isHasBadWords(value: string): boolean {
     return matches ? matches.length > 0 : false
 }
 
-export { isOleg, isTikTok, isHasBadWords }
+export { isTikTok, isHasBadWords }

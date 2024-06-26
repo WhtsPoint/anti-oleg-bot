@@ -1,10 +1,10 @@
 import { MyContext } from '../types/MyContext'
-import {addMessage, getMessageCount, popAllMessages} from '../reps/spamMessages'
+import { addMessage, getMessageCount, popAllMessages } from '../reps/spamMessages'
 
 export default function avoidSpam(
     next?: (ctx: MyContext) => Promise<void>,
     maxMessageLength: number = 5,
-    maxMessageCount: number = 3,
+    maxMessageCount: number = 2,
 ) {
     return async (ctx: MyContext) => {
         const chatId = ctx.chatId
@@ -24,6 +24,10 @@ export default function avoidSpam(
             const allMessages = await popAllMessages(chatId, message.from.id)
 
             await ctx.api.deleteMessages(chatId, allMessages)
+
+            return
         }
+
+        return next?.(ctx)
     }
 }
