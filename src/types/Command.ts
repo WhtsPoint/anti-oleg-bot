@@ -1,1 +1,1 @@
-export type Command = 'status' | 'olegization' | 'deolegization' 
+export type Command = 'status' | 'olegization' | 'deolegization' | 'olegist'
